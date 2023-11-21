@@ -6,7 +6,7 @@
 
 body {
   display: flex;
-  justify-content: center;
+  justify-content: top;
   align-items: center;
   flex-direction: column;
   background-color: #ece7e7;
@@ -62,7 +62,7 @@ input[type=tel] {
   margin-bottom: 24px;
   padding: 10px;
   text-align: center;
-  width: 280px;
+  width: 370px;
 }
 
 .ativa {
@@ -92,3 +92,4 @@ input[type=tel] {
   background-color: #e0e0e0; /* Cor de fundo da parte direita, ajuste conforme necessário */
   padding: 20px;
 }
+
