@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Simulador de Dados</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <div class="menutext">
+      <header>
+        <nav class="menu">
+            <ul>
+              <li><a class="textmenu" href="index.html">Página Inicial</a></li>
+              <li><a class="textmenu" href="AboutUs.html">Sobre Nós</a></li>
+              <li><a class="textmenu" href="Contact.html">Contato</a></li>
+            </ul>
+        </nav>
+      </header>
+    </div>
+    
+    <div class="principal_title"><h1> Simulador de Dados </h1></div>
+    <img class="image_principal" src="images/dice_principal.png">
+    
+    <input type="tel" placeholder="Cálculo" id="inputCalculos">
+
+    <input type="tel" placeholder="Resultado" id="inputValores">
+    
+    <section class="teclado">
+        <!-- Adicione os botões do teclado conforme necessário -->
+        <input type="button" value="d4" onclick="realizarRolagem(this)">
+        <input type="button" value="d6" onclick="realizarRolagem(this)">
+        <input type="button" value="d8" onclick="realizarRolagem(this)">
+        <input type="button" value="d10" onclick="realizarRolagem(this)">
+        <input type="button" value="d12" onclick="realizarRolagem(this)">
+        <input type="button" value="d20" onclick="realizarRolagem(this)">
+        <input type="button" value="d100" onclick="realizarRolagem(this)">
+        <input type="button" value="Apagar" onclick="realizarLimpeza()">
+    </section>
+
+    <script>
+        function simularJogada(tipoDado) {
+            const min = 1; // Valor mínimo para todos os tipos de dado
+            let max;
+
+            switch (tipoDado) {
+                case 'd4':
+                    max = 4;
+                    break;
+                case 'd6':
+                    max = 6;
+                    break;
+                case 'd8':
+                    max = 8;
+                    break;
+                case 'd10':
+                    max = 10;
+                    break;
+                case 'd12':
+                    max = 12;
+                    break;
+                case 'd20':
+                    max = 20;
+                    break;
+                case 'd100':
+                    max = 100;
+                    break;
+                default:
+                    throw new Error('Tipo de dado inválido');
+            }
+
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function realizarRolagem(obj) {
+            try {
+                var sum = 0;
+                const resultado = simularJogada(obj.value);
+
+                const inputCalculos = document.getElementById('inputCalculos');
+                inputCalculos.value = (inputCalculos.value == '' ? obj.value : inputCalculos.value + "+" + obj.value);
+                
+                const inputValores = document.getElementById('inputValores');
+                if (!isNaN(resultado) && resultado.length != 0) {
+                    sum = (inputValores.value == "") ? 0 : parseInt(inputValores.value);
+                    sum += parseInt(resultado);
+                    inputValores.value = sum;
+                }                
+                
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+
+        function realizarLimpeza() {
+            try {
+
+                const inputCalculos = document.getElementById('inputCalculos');
+                inputCalculos.value = "";
+
+                const inputValores = document.getElementById('inputValores');
+                inputValores.value = "";
+            } catch (error) {
+                console.error(error.message);
+            }
+        }        
+    </script>
+</body>
+</html>
